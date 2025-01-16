@@ -1,4 +1,6 @@
-class InputData {
+import 'package:equatable/equatable.dart';
+
+class InputData extends Equatable {
   final String name;
   final String email;
   final bool isSwitched;
@@ -17,11 +19,14 @@ class InputData {
     );
   }
 
-  void printData() {
-    print('printed');
-  }
+  @override
+  List<Object?> get props => [name, email, isSwitched];
 
-  void _printData2() {
-    print('printed 2');
-  }
+  // void printData() {
+  //   print('printed');
+  // }
+
+  // void _printData2() {
+  //   print('printed 2');
+  // }
 }
