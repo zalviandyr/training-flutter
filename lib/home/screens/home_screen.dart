@@ -2,7 +2,9 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:go_router/go_router.dart';
 import 'package:training_2/home/data/input_data.dart';
+import 'package:training_2/home/screens/home_detail_screen.dart';
 import 'package:training_2/home/widgets/input_text.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -97,6 +99,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   print(result?.names);
                 },
                 icon: Icon(Icons.upload),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  // context.push('/home/detail');
+                  context.goNamed('home.detail');
+                },
+                child: Text('Detail'),
               ),
             ],
           ),
