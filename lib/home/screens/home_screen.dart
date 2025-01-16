@@ -43,16 +43,18 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  void _toProfile() {
-    // Navigator.push(
-    //   context,
-    //   MaterialPageRoute(builder: (context) => ProfileScreen()),
-    // );
+  void _toProfile() => context.push(ProfileScreen.path);
 
-    context.push(ProfileScreen.path);
-  }
-
-  void _toDetail() => context.pushNamed(HomeDetailScreen.name);
+  void _toDetail() => context.pushNamed(
+        HomeDetailScreen.name,
+        extra: HomeDetailExtra(
+          data: InputData(
+            name: 'Test',
+            email: 'Test@email.com',
+            isSwitched: false,
+          ),
+        ),
+      );
 
   void _compareAction() {
     InputData inputData1 = InputData(

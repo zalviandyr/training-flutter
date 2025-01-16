@@ -1,11 +1,15 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:training_2/home/screens/home_detail_screen.dart';
 import 'package:training_2/home/screens/home_screen.dart';
+import 'package:training_2/movie/blocs/movie_bloc.dart';
+import 'package:training_2/movie/screens/movie_screen.dart';
 import 'package:training_2/profile/screens/profile_screen.dart';
 
 class AppRouter {
   static GoRouter router = GoRouter(
-    initialLocation: HomeScreen.path,
+    // initialLocation: HomeScreen.path,
+    initialLocation: MovieScreen.path,
     routes: [
       GoRoute(
         path: HomeScreen.path,
@@ -15,7 +19,9 @@ class AppRouter {
           GoRoute(
             path: HomeDetailScreen.path,
             name: HomeDetailScreen.name,
-            builder: (context, state) => HomeDetailScreen(),
+            builder: (context, state) => HomeDetailScreen(
+              extra: state.extra as HomeDetailExtra,
+            ),
           ),
         ],
       ),
@@ -24,6 +30,14 @@ class AppRouter {
         name: ProfileScreen.name,
         builder: (context, state) => ProfileScreen(),
       ),
+      GoRoute(
+        path: MovieScreen.path,
+        name: MovieScreen.name,
+        builder: (context, state) => BlocProvider(
+          create: (context) => MovieBloc(),
+          child: MovieScreen(),
+        ),
+      )
     ],
   );
 }
