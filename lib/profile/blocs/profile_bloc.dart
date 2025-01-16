@@ -8,10 +8,21 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on(_onInputData);
   }
 
-  void _onUpdateLabel(ProfileUpdateLabel event, Emitter<ProfileState> emit) {
-    String label = event.label;
+  Future<void> _onUpdateLabel(
+      ProfileUpdateLabel event, Emitter<ProfileState> emit) async {
+    try {
+      String label = event.label;
 
-    emit(ProfileUpdateLabelSuccess(label: label));
+      emit(ProfileLoading());
+
+      await Future.delayed(Duration(seconds: 3));
+
+      throw Error();
+
+      emit(ProfileUpdateLabelSuccess(label: label));
+    } catch (e) {
+      emit(ProfileError());
+    }
   }
 
   void _onInputData(ProfileInputData event, Emitter<ProfileState> emit) {

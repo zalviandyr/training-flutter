@@ -39,8 +39,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
           children: [
             BlocBuilder<ProfileBloc, ProfileState>(
               builder: (context, state) {
+                if (state is ProfileLoading) {
+                  return CircularProgressIndicator();
+                }
+
                 if (state is ProfileUpdateLabelSuccess) {
                   return Text(state.label);
+                }
+
+                if (state is ProfileError) {
+                  return Text('Error nih');
                 }
 
                 return Text('Profile Screen');
