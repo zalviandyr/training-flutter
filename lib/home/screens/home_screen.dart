@@ -1,11 +1,15 @@
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:go_router/go_router.dart';
+import 'package:training_2/core/widgets/button.dart';
 import 'package:training_2/home/data/input_data.dart';
 import 'package:training_2/home/widgets/input_text.dart';
+import 'package:training_2/profile/screens/profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
+  static const String path = '/home';
+
   const HomeScreen({super.key});
 
   @override
@@ -28,6 +32,15 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  void _toProfile() {
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(builder: (context) => ProfileScreen()),
+    // );
+
+    context.push(ProfileScreen.path);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,15 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
           key: _formKey,
           child: Column(
             children: [
-              InputText(
-                name: 'name',
-              ),
-              InputText(
-                name: 'first_name',
-              ),
-              InputText(
-                name: 'last_name',
-              ),
+              InputText(name: 'name'),
               FormBuilderTextField(
                 name: 'email',
                 validator: FormBuilderValidators.compose([
@@ -65,16 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     'Switch',
                   )),
               SizedBox(height: 50),
-              MaterialButton(
-                color: Colors.red,
-                textColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                padding: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-                onPressed: _submitAction,
-                child: Text('Material button'),
-              ),
+              Button(onPressed: _submitAction, label: 'Submit'),
               SizedBox(height: 50),
               if (_inputData != null)
                 Column(
@@ -88,16 +84,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     if (_inputData?.isSwitched ?? false) Text('Switch Hidup'),
                   ],
                 ),
-              SizedBox(height: 50),
-              IconButton(
-                onPressed: () async {
-                  FilePickerResult? result =
-                      await FilePicker.platform.pickFiles();
+              SizedBox(height: 100),
+              Button(onPressed: _toProfile, label: 'Profile Screen'),
+              // IconButton(
+              //   onPressed: () async {
+              //     FilePickerResult? result =
+              //         await FilePicker.platform.pickFiles();
 
-                  print(result?.names);
-                },
-                icon: Icon(Icons.upload),
-              ),
+              //     print(result?.names);
+              //   },
+              //   icon: Icon(Icons.upload),
+              // ),
             ],
           ),
         ),
