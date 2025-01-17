@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:training_2/core/app/app.dart';
 import 'package:training_2/core/app/app_bloc_observer.dart';
 import 'package:training_2/core/app/app_router.dart';
 import 'package:training_2/profile/blocs/profile_bloc.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
 
   Bloc.observer = AppBlocObserver();
+
+  await App.instance.init();
+
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {

@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
+import 'package:training_2/auth/screens/login_screen.dart';
+import 'package:training_2/core/app/app.dart';
 import 'package:training_2/core/widgets/button.dart';
 import 'package:training_2/home/data/input_data.dart';
 import 'package:training_2/home/screens/home_detail_screen.dart';
@@ -74,6 +76,12 @@ class _HomeScreenState extends State<HomeScreen> {
     print(inputData1 == inputData2);
   }
 
+  void _logoutAction() async {
+    await App.instance.logout();
+
+    context.pushReplacementNamed(LoginScreen.name);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -105,7 +113,6 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(height: 50),
               Button(onPressed: _submitAction, label: 'Submit'),
               SizedBox(height: 50),
-
               BlocBuilder<ProfileBloc, ProfileState>(
                 builder: (context, state) {
                   if (state is ProfileInputDataSuccess) {
@@ -125,22 +132,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   return SizedBox.shrink();
                 },
               ),
-
               SizedBox(height: 100),
               Button(onPressed: _toProfile, label: 'Profile Screen'),
               SizedBox(height: 50),
               Button(onPressed: _toDetail, label: 'Home Detail Screen'),
               SizedBox(height: 50),
               Button(onPressed: _compareAction, label: 'Komparasi'),
-              // IconButton(
-              //   onPressed: () async {
-              //     FilePickerResult? result =
-              //         await FilePicker.platform.pickFiles();
-
-              //     print(result?.names);
-              //   },
-              //   icon: Icon(Icons.upload),
-              // ),
+              Spacer(),
+              Button(onPressed: _logoutAction, label: 'Logout'),
             ],
           ),
         ),
