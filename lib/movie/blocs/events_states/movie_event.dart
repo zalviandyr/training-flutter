@@ -5,4 +5,11 @@ abstract class MovieEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class MovieFetch extends MovieEvent {}
+class MovieFetch extends MovieEvent {
+  final int page;
+
+  MovieFetch({required this.page});
+
+  @override
+  List<Object?> get props => [page];
+}

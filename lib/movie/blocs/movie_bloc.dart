@@ -13,9 +13,15 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
     try {
       emit(MovieLoading());
 
-      List<Movie> movies = await MovieService.getPopular();
+      await Future.delayed(Duration(seconds: 3));
 
-      emit(MovieFetchSuccess(movies: movies));
+      List<Movie> movies = await MovieService.getPopular(event.page);
+
+      if (event.page > 4) {
+        movies.clear();
+      }
+
+      emit(MovieFetchSuccess(movies: movies, nextPage: event.page + 1));
     } catch (e, trace) {
       onError(e, trace);
 

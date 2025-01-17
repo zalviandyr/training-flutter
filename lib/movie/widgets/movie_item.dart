@@ -36,25 +36,40 @@ class MovieItem extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: CachedNetworkImage(
-                    imageUrl: movie?.poster ??
-                        'https://placehold.co/600x400/000000/FFFFFF/png',
-                    fit: BoxFit.cover,
-                    width: double.infinity,
-                    height: 180,
-                    placeholder: (context, url) {
-                      return Shimmer.fromColors(
-                        baseColor: Colors.grey.shade400,
-                        highlightColor: Colors.grey.shade300,
-                        child: Container(
+                Builder(builder: (context) {
+                  if (isLoading) {
+                    return Shimmer.fromColors(
+                      baseColor: Colors.grey.shade400,
+                      highlightColor: Colors.grey.shade300,
+                      child: Container(
+                        height: 180,
+                        decoration: BoxDecoration(
                           color: Colors.grey.shade400,
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                      );
-                    },
-                  ),
-                ),
+                      ),
+                    );
+                  }
+
+                  return ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: CachedNetworkImage(
+                      imageUrl: movie!.poster,
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                      height: 180,
+                      placeholder: (context, url) {
+                        return Shimmer.fromColors(
+                          baseColor: Colors.grey.shade400,
+                          highlightColor: Colors.grey.shade300,
+                          child: Container(
+                            color: Colors.grey.shade400,
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                }),
                 SizedBox(height: 20),
                 Builder(builder: (context) {
                   if (isLoading) {

@@ -14,9 +14,10 @@ class MovieError extends MovieState {}
 
 class MovieFetchSuccess extends MovieState {
   final List<Movie> movies;
+  final int nextPage;
 
-  MovieFetchSuccess({required this.movies});
+  MovieFetchSuccess({required this.movies, required this.nextPage});
 
   @override
-  List<Object?> get props => [movies];
+  List<Object?> get props => [movies, nextPage];
 }
