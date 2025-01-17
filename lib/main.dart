@@ -5,6 +5,7 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:training_2/core/app/app.dart';
 import 'package:training_2/core/app/app_bloc_observer.dart';
 import 'package:training_2/core/app/app_router.dart';
+import 'package:training_2/core/screens/nav_screen.dart';
 import 'package:training_2/profile/blocs/profile_bloc.dart';
 
 void main() async {

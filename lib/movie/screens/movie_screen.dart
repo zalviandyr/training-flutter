@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:training_2/core/models/movie.dart';
 import 'package:training_2/movie/blocs/events_states/movie_event.dart';
 import 'package:training_2/movie/blocs/events_states/movie_state.dart';
@@ -66,30 +67,19 @@ class _MovieScreenState extends State<MovieScreen> {
             itemBuilder: (context, item, index) {
               return MovieItem(movie: item);
             },
+            firstPageProgressIndicatorBuilder: (context) {
+              return Center(
+                child: LoadingAnimationWidget.bouncingBall(
+                  color: Colors.blue,
+                  size: 50,
+                ),
+              );
+            },
             newPageProgressIndicatorBuilder: (context) {
               return MovieItem.loading();
             },
           ),
         ),
-        // body: BlocBuilder<MovieBloc, MovieState>(
-        //   builder: (context, state) {
-        //     return GridView.builder(
-        //       itemCount: state is MovieFetchSuccess ? state.movies.length : 1,
-        //       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        //         crossAxisCount: 2,
-        //         crossAxisSpacing: 5,
-        //         mainAxisSpacing: 2,
-        //       ),
-        //       itemBuilder: (context, index) {
-        //         if (state is MovieFetchSuccess) {
-        //           return MovieItem(movie: state.movies[index]);
-        //         }
-
-        //         return MovieItem.loading();
-        //       },
-        //     );
-        //   },
-        // ),
       ),
     );
   }
