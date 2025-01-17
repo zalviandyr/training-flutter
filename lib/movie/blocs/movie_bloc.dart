@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:training_2/core/models/movie.dart';
 import 'package:training_2/core/services/movie_service.dart';
@@ -15,13 +13,11 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
     try {
       emit(MovieLoading());
 
-      await Future.delayed(Duration(seconds: 3));
-
       List<Movie> movies = await MovieService.getPopular();
 
       emit(MovieFetchSuccess(movies: movies));
-    } catch (e) {
-      log('error', error: e);
+    } catch (e, trace) {
+      onError(e, trace);
 
       emit(MovieError());
     }

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:training_2/core/app/app_bloc_observer.dart';
 import 'package:training_2/core/app/app_router.dart';
 import 'package:training_2/profile/blocs/profile_bloc.dart';
 
 void main() {
   runApp(const MyApp());
+
+  Bloc.observer = AppBlocObserver();
 }
 
 class MyApp extends StatelessWidget {
