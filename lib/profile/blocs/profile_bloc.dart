@@ -17,8 +17,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
       await Future.delayed(Duration(seconds: 3));
 
-      throw Error();
-
       emit(ProfileUpdateLabelSuccess(label: label));
     } catch (e) {
       emit(ProfileError());

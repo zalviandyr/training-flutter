@@ -15,7 +15,7 @@ class AppRouter {
     redirect: (context, state) {
       if (state.fullPath == LoginScreen.path &&
           App.instance.getToken() != null) {
-        return HomeScreen.path;
+        return ProfileScreen.path;
       }
 
       return null;
